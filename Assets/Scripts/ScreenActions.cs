@@ -1,7 +1,5 @@
 using System;
 using UnityEngine;
-using UnityEngine.UI;
-using Cursor = UnityEngine.UIElements.Cursor;
 
 public class ScreenActions : MonoBehaviour{
     public GameObject screenPanel;
