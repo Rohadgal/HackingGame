@@ -53,13 +53,13 @@ public class PlayerMovement : MonoBehaviour{
     }
 
     private void OnEnable(){
-        ScreenActions.startPc += stopPlayerMovement;
-        ScreenActions.stopPc += startPlayerMovement;
+        LevelManager.startPc += stopPlayerMovement;
+        LevelManager.stopPc += startPlayerMovement;
     }
 
     private void OnDisable(){
-        ScreenActions.startPc -= stopPlayerMovement;
-        ScreenActions.stopPc -= startPlayerMovement;
+        LevelManager.startPc -= stopPlayerMovement;
+        LevelManager.stopPc -= startPlayerMovement;
     }
 
     void stopPlayerMovement(){
