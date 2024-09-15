@@ -1,20 +1,42 @@
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.UIElements;
+using Cursor = UnityEngine.UIElements.Cursor;
 
 public class ScreenActions : MonoBehaviour{
     public GameObject screenPanel;
     public GameObject textForInput;
     private bool canStartScreen = false;
+
+    //public InputField _userInput;
+    private string inputText;
+    private string expectedText = "C";
     
     public delegate void computerHandler();
 
     public static event computerHandler startPc;
     public static event computerHandler stopPc;
-    
-    // Start is called before the first frame update
+
+    public void CheckInput(string t_input){
+        inputText = t_input;
+        if (inputText.Equals(expectedText, StringComparison.OrdinalIgnoreCase))
+        {
+            OpenDoor();
+            inputText = "";
+            return;
+        }
+
+        inputText = "";
+        Debug.Log("Incorrect input.");
+        
+    }
+
+    private void OpenDoor(){
+        Debug.Log("Door openned");
+        stopScreen();
+    }
+
+
     void Start()
     {
         screenPanel.SetActive(false);
@@ -38,10 +60,21 @@ public class ScreenActions : MonoBehaviour{
     private void startScreen(){
         screenPanel.SetActive(true);
         textForInput.SetActive(false);
+
+        UnityEngine.Cursor.lockState = CursorLockMode.Confined;
+        UnityEngine.Cursor.visible = true;
+
     }
     
     private void stopScreen(){
         screenPanel.SetActive(false);
+        UnityEngine.Cursor.lockState = CursorLockMode.Locked;
+        UnityEngine.Cursor.visible = false;
+        stopPc?.Invoke();
+    }
+
+    public void StopScreenAndMove(){
+        stopScreen();
     }
 
     private void OnDisable(){
@@ -59,9 +92,9 @@ public class ScreenActions : MonoBehaviour{
             startScreen();
         }
 
-        if (Input.GetKeyDown(KeyCode.Q)) {
-            stopPc?.Invoke();
-            stopScreen();
-        }
+        // if (Input.GetKeyDown(KeyCode.Q)) {
+        //     stopPc?.Invoke();
+        //     stopScreen();
+        // }
     }
 }

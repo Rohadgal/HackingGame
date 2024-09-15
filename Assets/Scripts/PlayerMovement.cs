@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour{
     void Start(){
         Cursor.lockState = CursorLockMode.Locked;
         transform.Rotate(Vector3.up * 90f);
+     
     }
 
     // Update is called once per frame
