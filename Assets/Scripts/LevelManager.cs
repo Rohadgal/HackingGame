@@ -38,10 +38,12 @@ public class LevelManager : MonoBehaviour
         computers[0].GetComponent<Computer>()._code = "c";
         computers[1].GetComponent<Computer>()._code = "d";
         computers[2].GetComponent<Computer>()._code = "e";
+        computers[3].GetComponent<Computer>()._code = "z";
         
         computers[0].GetComponent<Computer>()._index = 0;
         computers[1].GetComponent<Computer>()._index = 1;
         computers[2].GetComponent<Computer>()._index = 2;
+        computers[3].GetComponent<Computer>()._index = 3;
     }
     
     public void CheckInput(string t_input){
@@ -98,7 +100,7 @@ public class LevelManager : MonoBehaviour
 
     void moveDoor(){
 
-        if (!hasSetInitPos) {
+        if (!hasSetInitPos && computerIndex != 3) {
             hasSetInitPos = true;
             isMoving = true;
             initPos = doors[computerIndex].transform.position;
