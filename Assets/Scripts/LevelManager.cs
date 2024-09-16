@@ -36,9 +36,9 @@ public class LevelManager : MonoBehaviour
         textForInput.SetActive(false);
 
         computers[0].GetComponent<Computer>()._code = "c";
-        computers[1].GetComponent<Computer>()._code = "d";
-        computers[2].GetComponent<Computer>()._code = "e";
-        computers[3].GetComponent<Computer>()._code = "z";
+        computers[1].GetComponent<Computer>()._code = "gT";
+        computers[2].GetComponent<Computer>()._code = "3";
+        computers[3].GetComponent<Computer>()._code = "z"; //Contraseña final
         
         computers[0].GetComponent<Computer>()._index = 0;
         computers[1].GetComponent<Computer>()._index = 1;
