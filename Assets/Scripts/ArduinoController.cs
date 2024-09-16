@@ -12,6 +12,7 @@ public class ArduinoController : MonoBehaviour
     {
         sp.Open(); // Open the serial connection
         sp.ReadTimeout = 50;
+        sp.Write("k");
     }
 
     void Update(){
