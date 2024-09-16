@@ -7,10 +7,18 @@ public class LevelManager : MonoBehaviour
 {
     public GameObject textForInput;
     [SerializeField] private List<Computer> computers;
+    [SerializeField] private List<GameObject> doors;
     private int computerIndex;
     private bool canStartScreen = false;
     private string inputText;
-    
+    private bool canOpenDoor;
+    private float lerpTime;
+
+    private bool hasSetInitPos;
+    private bool isMoving;
+
+    private Vector3 initPos;
+    private Vector3 endPos;
     public delegate void computerHandler();
 
     public delegate void passwordHandler(int value);
@@ -20,7 +28,6 @@ public class LevelManager : MonoBehaviour
     public static event passwordHandler turnLightOn;
 
 
-    
     void Start()
     {
         foreach (Computer computer in computers) {
@@ -54,6 +61,7 @@ public class LevelManager : MonoBehaviour
 
     private void OpenDoor(){
         Debug.Log("Door openned");
+        canOpenDoor = true;
         stopScreen();
     }
 
@@ -68,6 +76,7 @@ public class LevelManager : MonoBehaviour
         textForInput.SetActive(false);
         canStartScreen = false;
     }
+    
     private void startScreen(){
         computers[computerIndex].GetComputerScreen().SetActive(true);
         textForInput.SetActive(false);
@@ -87,7 +96,37 @@ public class LevelManager : MonoBehaviour
         stopScreen();
     }
 
+    void moveDoor(){
+
+        if (!hasSetInitPos) {
+            hasSetInitPos = true;
+            isMoving = true;
+            initPos = doors[computerIndex].transform.position;
+            endPos = initPos + new Vector3(0, 2, 0);
+        }
+
+        if (isMoving) {
+            lerpTime += Time.deltaTime; 
+            lerpTime = Mathf.Clamp01(lerpTime); // Ensure lerpTime is between 0 and 1
+            doors[computerIndex].transform.position = Vector3.Lerp(initPos, endPos,  lerpTime);
+        }
+
+        if (lerpTime >= 1) {
+            isMoving = false;
+            hasSetInitPos = false;
+            canOpenDoor = false;
+            lerpTime = 0;
+        }
+
+    }
+    
     private void Update(){
+
+        if (canOpenDoor) {
+            moveDoor();
+        }
+        
+        
         if (!canStartScreen) {
             return;
         }

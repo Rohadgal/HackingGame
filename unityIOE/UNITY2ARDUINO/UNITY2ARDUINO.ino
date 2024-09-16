@@ -41,6 +41,10 @@ void loop() {
         digitalWrite(ledPin3, HIGH);
         Serial.println("LED toggled");
         break;
+      case 'k':
+        digitalWrite(ledPin1, LOW);
+        digitalWrite(ledPin2, LOW);
+        digitalWrite(ledPin3, LOW);
       default: break;
     }
     return;

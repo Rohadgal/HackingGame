@@ -5842,6 +5842,10 @@ MonoBehaviour:
   - {fileID: 2131017276}
   - {fileID: 688216020}
   - {fileID: 458399831}
+  doors:
+  - {fileID: 3695311360923272447}
+  - {fileID: 3695311361497818703}
+  - {fileID: 3695311362342064586}
 --- !u!4 &1909444699
 Transform:
   m_ObjectHideFlags: 0
@@ -9229,7 +9233,7 @@ GameObject:
   - component: {fileID: 6685193161316968343}
   - component: {fileID: 7733311284485699904}
   m_Layer: 0
-  m_Name: Door_5.001
+  m_Name: Door1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9248,7 +9252,7 @@ GameObject:
   - component: {fileID: 6685193161900148007}
   - component: {fileID: 7733311282980117488}
   m_Layer: 0
-  m_Name: Door_5.001
+  m_Name: Door2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9267,7 +9271,7 @@ GameObject:
   - component: {fileID: 6685193162198758050}
   - component: {fileID: 7733311283220130933}
   m_Layer: 0
-  m_Name: Door_5.001
+  m_Name: Door3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
