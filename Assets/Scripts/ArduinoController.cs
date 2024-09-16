@@ -1,3 +1,4 @@
+using System;
 using System.IO.Ports;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -5,7 +6,7 @@ using UnityEngine;
 public class ArduinoController : MonoBehaviour
 {
     SerialPort sp = new SerialPort("COM4", 9600); // Change COM3 to your Arduino's port
-    int lives = 3;
+    int computers = 3;
 
     void Start()
     {
@@ -36,5 +37,19 @@ public class ArduinoController : MonoBehaviour
         {
             sp.Close();
         }
+    }
+    private void TurnLightOn(int value){
+        Debug.Log("lED: " + value);
+        string ledPin = value.ToString();
+        sp.Write(ledPin);
+    }
+
+    private void OnEnable(){
+        LevelManager.turnLightOn += TurnLightOn;
+    }
+
+
+    private void OnDisable(){
+        LevelManager.turnLightOn -= TurnLightOn;
     }
 }

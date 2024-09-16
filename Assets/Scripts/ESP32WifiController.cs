@@ -48,4 +48,18 @@ public class ESP32WifiController : MonoBehaviour {
 		writer.Close();
 		tcpClient.Close();
 	}
+	
+	private void OnEnable(){
+		LevelManager.turnLightOn += TurnLightOn;
+	}
+
+
+	private void OnDisable(){
+		SendDataToESP32("5");
+		LevelManager.turnLightOn -= TurnLightOn;
+	}
+
+	private void TurnLightOn(int value){
+		SendDataToESP32(value.ToString());
+	}
 }
