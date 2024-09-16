@@ -12,8 +12,12 @@ public class LevelManager : MonoBehaviour
     private string inputText;
     
     public delegate void computerHandler();
+
+    public delegate void passwordHandler(int value);
     public static event computerHandler startPc;
     public static event computerHandler stopPc;
+
+    public static event passwordHandler turnLightOn;
 
 
     
@@ -37,6 +41,7 @@ public class LevelManager : MonoBehaviour
         inputText = t_input;
         if (inputText.Equals(computers[computerIndex].GetComponent<Computer>()._code, StringComparison.OrdinalIgnoreCase))
         {
+            turnLightOn?.Invoke(computerIndex);
             OpenDoor();
             inputText = "";
             return;
