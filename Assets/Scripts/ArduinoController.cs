@@ -15,10 +15,10 @@ public class ArduinoController : MonoBehaviour
     }
 
     void Update(){
-        if (Input.GetKeyDown(KeyCode.L)) {
-            LoseLife();
-            Debug.Log("LIFE LOST");
-        }
+        // if (Input.GetKeyDown(KeyCode.L)) {
+        //     LoseLife();
+        //     Debug.Log("LIFE LOST");
+        // }
     }
 
     public void LoseLife()
