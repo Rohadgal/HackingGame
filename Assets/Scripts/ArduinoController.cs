@@ -1,12 +1,10 @@
-using System;
 using System.IO.Ports;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class ArduinoController : MonoBehaviour
 {
     SerialPort sp = new SerialPort("COM4", 9600); // Change COM3 to your Arduino's port
-    int computers = 3;
+    //int computers = 3;
 
     void Start()
     {

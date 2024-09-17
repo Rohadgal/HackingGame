@@ -1,6 +1,6 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class LevelManager : MonoBehaviour
@@ -8,6 +8,7 @@ public class LevelManager : MonoBehaviour
     public GameObject textForInput;
     [SerializeField] private List<Computer> computers;
     [SerializeField] private List<GameObject> doors;
+    [SerializeField] private string _url = "";
     private int computerIndex;
     private bool canStartScreen = false;
     private string inputText;
@@ -36,9 +37,9 @@ public class LevelManager : MonoBehaviour
         textForInput.SetActive(false);
 
         computers[0].GetComponent<Computer>()._code = "c";
-        computers[1].GetComponent<Computer>()._code = "d";
-        computers[2].GetComponent<Computer>()._code = "e";
-        computers[3].GetComponent<Computer>()._code = "z";
+        computers[1].GetComponent<Computer>()._code = "gT";
+        computers[2].GetComponent<Computer>()._code = "3";
+        computers[3].GetComponent<Computer>()._code = "z"; //Contraseña final
         
         computers[0].GetComponent<Computer>()._index = 0;
         computers[1].GetComponent<Computer>()._index = 1;
@@ -80,11 +81,19 @@ public class LevelManager : MonoBehaviour
     }
     
     private void startScreen(){
-        computers[computerIndex].GetComputerScreen().SetActive(true);
-        textForInput.SetActive(false);
-
         UnityEngine.Cursor.lockState = CursorLockMode.Confined;
         UnityEngine.Cursor.visible = true;
+        textForInput.SetActive(false);
+        computers[computerIndex].GetComputerScreen().SetActive(true);
+
+        if (computerIndex == 3) {
+            StartCoroutine(waitToOpenUrl());
+        }
+    }
+
+    IEnumerator waitToOpenUrl(){
+        yield return new WaitForSeconds(3f);
+        OpenWebsite();
     }
     
     private void stopScreen(){
@@ -119,7 +128,14 @@ public class LevelManager : MonoBehaviour
             canOpenDoor = false;
             lerpTime = 0;
         }
-
+    }
+    
+    public void OpenWebsite(){
+        if (_url == "") {
+            Debug.Log("No valid url");
+            return;
+        }
+        Application.OpenURL(_url);
     }
     
     private void Update(){
