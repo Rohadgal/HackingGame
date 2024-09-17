@@ -26,9 +26,9 @@ public class ESP32WifiController : MonoBehaviour {
 				} else {
 					Debug.LogWarning("No data available yet.");
 				}
-				if (Input.GetKeyDown(KeyCode.Space)) { // Al presionar la barra espaciadora
-					SendDataToESP32("toggle_led");
-				}
+				// if (Input.GetKeyDown(KeyCode.Space)) { // Al presionar la barra espaciadora
+				// 	SendDataToESP32("toggle_led");
+				// }
 			} catch (IOException e) {
 				Debug.LogError("Error de lectura o tiempo de espera agotado: " + e.Message);
 			}

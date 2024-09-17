@@ -43,12 +43,18 @@ public class ArduinoController : MonoBehaviour
         sp.Write(ledPin);
     }
 
+    private void PlaySound(string sound){
+        sp.Write(sound);
+    }
+
     private void OnEnable(){
         LevelManager.turnLightOn += TurnLightOn;
+        LevelManager.playSound += PlaySound;
     }
 
 
     private void OnDisable(){
         LevelManager.turnLightOn -= TurnLightOn;
+        LevelManager.playSound -= PlaySound;
     }
 }
