@@ -1,6 +1,4 @@
-using System;
 using System.IO.Ports;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class ArduinoController : MonoBehaviour
