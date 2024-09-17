@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Computer : MonoBehaviour{
@@ -29,5 +30,6 @@ public class Computer : MonoBehaviour{
     private void OnTriggerExit(Collider other){
 	    finished?.Invoke(_index);
     }
+
     
 }

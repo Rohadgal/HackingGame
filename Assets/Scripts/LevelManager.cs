@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,6 +8,7 @@ public class LevelManager : MonoBehaviour
     public GameObject textForInput;
     [SerializeField] private List<Computer> computers;
     [SerializeField] private List<GameObject> doors;
+    [SerializeField] private string _url = "";
     private int computerIndex;
     private bool canStartScreen = false;
     private string inputText;
@@ -79,11 +81,19 @@ public class LevelManager : MonoBehaviour
     }
     
     private void startScreen(){
-        computers[computerIndex].GetComputerScreen().SetActive(true);
-        textForInput.SetActive(false);
-
         UnityEngine.Cursor.lockState = CursorLockMode.Confined;
         UnityEngine.Cursor.visible = true;
+        textForInput.SetActive(false);
+        computers[computerIndex].GetComputerScreen().SetActive(true);
+
+        if (computerIndex == 3) {
+            StartCoroutine(waitToOpenUrl());
+        }
+    }
+
+    IEnumerator waitToOpenUrl(){
+        yield return new WaitForSeconds(3f);
+        OpenWebsite();
     }
     
     private void stopScreen(){
@@ -118,7 +128,14 @@ public class LevelManager : MonoBehaviour
             canOpenDoor = false;
             lerpTime = 0;
         }
-
+    }
+    
+    public void OpenWebsite(){
+        if (_url == "") {
+            Debug.Log("No valid url");
+            return;
+        }
+        Application.OpenURL(_url);
     }
     
     private void Update(){
