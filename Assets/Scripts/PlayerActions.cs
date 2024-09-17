@@ -20,6 +20,11 @@ public class PlayerActions : MonoBehaviour
     }
     void Update()
     {
+        SelectObject();
+    }
+
+    private void SelectObject()
+    {
         if (Input.GetKeyDown(KeyCode.E)) 
         {
             if (heldObj == null) 
@@ -42,6 +47,7 @@ public class PlayerActions : MonoBehaviour
                 }
             }
         }
+
         if (heldObj != null) 
         {
             MoveObject(); 
@@ -53,6 +59,7 @@ public class PlayerActions : MonoBehaviour
 
         }
     }
+
     void PickUpObject(GameObject pickUpObj)
     {
         if (pickUpObj.GetComponent<Rigidbody>()) 
