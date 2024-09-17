@@ -1,18 +1,30 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
-public class CubeTrigger : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+public class CubeTrigger : MonoBehaviour{
+	[SerializeField] private int indexCube;
+	private bool isCorrect;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+	public bool getIsCorrect(){
+		return isCorrect;
+	}
+
+	private void OnTriggerEnter(Collider other){
+		if (other.CompareTag("Cube")) {
+			if (other.gameObject.GetComponent<RoomCube>().getCubeNumber() == indexCube) {
+				isCorrect = true;
+				Debug.Log("CORRECT CUBE");
+			}
+		}
+	}
+
+	private void OnTriggerExit(Collider other){
+		if (other.CompareTag("Cube")) {
+			// if (other.gameObject.GetComponent<RoomCube>().getCubeNumber() == indexCube) {
+			// 	isCorrect = false;
+			// }
+			isCorrect = false;
+			Debug.Log("CUBE EXIT");
+		}
+	}
 }
