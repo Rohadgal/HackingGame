@@ -1,7 +1,7 @@
 #include <WiFi.h>
 
-const char* ssid = "INFINITUM6371";
-const char* password = "9h5RfxHMbh";
+const char* ssid = "xxxxxxxxx";
+const char* password = "xxxxxxxx";
 WiFiServer server(8080); // Puerto 8080, puedes cambiarlo si lo prefieres
 //int boton = 2;
 int ledPin1 = 4; // Pin para el LED
