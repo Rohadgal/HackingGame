@@ -5,6 +5,10 @@ public class TriggerVerification : MonoBehaviour{
     [SerializeField] private List<CubeTrigger> cubeTriggers;
     [SerializeField] private GameObject codeImage;
     private bool canShowCode;
+    
+    public delegate void codeHandler();
+
+    public static event codeHandler notifyCodeOn;
 
     private void Start(){
         if(codeImage != null){ codeImage.SetActive(false);}
@@ -21,6 +25,8 @@ public class TriggerVerification : MonoBehaviour{
                 canShowCode = true;
                 codeImage?.SetActive(true);
                 Debug.Log("SHOW PASSCODE");
+                notifyCodeOn?.Invoke();
+                
             }
         }
     }

@@ -23,10 +23,13 @@ public class LevelManager : MonoBehaviour
     public delegate void computerHandler();
 
     public delegate void passwordHandler(int value);
+
+    public delegate void buzzerHandler(string sound);
     public static event computerHandler startPc;
     public static event computerHandler stopPc;
-
     public static event passwordHandler turnLightOn;
+
+    public static event buzzerHandler playSound;
 
 
     void Start()
@@ -49,17 +52,30 @@ public class LevelManager : MonoBehaviour
     
     public void CheckInput(string t_input){
         inputText = t_input;
-        if (inputText.Equals(computers[computerIndex].GetComponent<Computer>()._code, StringComparison.OrdinalIgnoreCase))
-        {
-            turnLightOn?.Invoke(computerIndex);
-            OpenDoor();
+        if (inputText.Equals(computers[computerIndex].GetComponent<Computer>()._code, StringComparison.OrdinalIgnoreCase)) {
+            if (computerIndex != 3) {
+                turnLightOn?.Invoke(computerIndex);
+                OpenDoor();
+            }
+            else {
+                playBuzzer("s");
+            }
             inputText = "";
             return;
         }
 
         inputText = "";
         Debug.Log("Incorrect input.");
+        playBuzzer("n");
         
+    }
+
+    void playBuzzer(string value){
+        playSound?.Invoke(value);
+    }
+
+    void playCodeActivationSound(){
+        playSound?.Invoke("g");
     }
 
     private void OpenDoor(){
@@ -158,10 +174,12 @@ public class LevelManager : MonoBehaviour
     private void OnEnable(){
         Computer.started += showText;
         Computer.finished += hideText;
+        TriggerVerification.notifyCodeOn += playCodeActivationSound;
     }
     
     private void OnDisable(){
         Computer.started -= showText;
         Computer.finished -= hideText;
+        TriggerVerification.notifyCodeOn -= playCodeActivationSound;
     }
 }

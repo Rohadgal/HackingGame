@@ -26,9 +26,9 @@ public class ESP32WifiController : MonoBehaviour {
 				} else {
 					Debug.LogWarning("No data available yet.");
 				}
-				if (Input.GetKeyDown(KeyCode.Space)) { // Al presionar la barra espaciadora
-					SendDataToESP32("toggle_led");
-				}
+				// if (Input.GetKeyDown(KeyCode.Space)) { // Al presionar la barra espaciadora
+				// 	SendDataToESP32("toggle_led");
+				// }
 			} catch (IOException e) {
 				Debug.LogError("Error de lectura o tiempo de espera agotado: " + e.Message);
 			}
@@ -51,15 +51,21 @@ public class ESP32WifiController : MonoBehaviour {
 	
 	private void OnEnable(){
 		LevelManager.turnLightOn += TurnLightOn;
+		LevelManager.playSound += playBuzzer;
 	}
 
 
 	private void OnDisable(){
-		SendDataToESP32("5");
+		//SendDataToESP32("5");
 		LevelManager.turnLightOn -= TurnLightOn;
+		LevelManager.playSound -= playBuzzer;
 	}
 
 	private void TurnLightOn(int value){
 		SendDataToESP32(value.ToString());
+	}
+
+	private void playBuzzer(string value){
+		SendDataToESP32(value);
 	}
 }
