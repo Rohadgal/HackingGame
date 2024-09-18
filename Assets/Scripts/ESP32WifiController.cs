@@ -51,15 +51,21 @@ public class ESP32WifiController : MonoBehaviour {
 	
 	private void OnEnable(){
 		LevelManager.turnLightOn += TurnLightOn;
+		LevelManager.playSound += playBuzzer;
 	}
 
 
 	private void OnDisable(){
-		SendDataToESP32("5");
+		//SendDataToESP32("5");
 		LevelManager.turnLightOn -= TurnLightOn;
+		LevelManager.playSound -= playBuzzer;
 	}
 
 	private void TurnLightOn(int value){
 		SendDataToESP32(value.ToString());
+	}
+
+	private void playBuzzer(string value){
+		SendDataToESP32(value);
 	}
 }
