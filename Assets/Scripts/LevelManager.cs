@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private List<Computer> computers;
     [SerializeField] private List<GameObject> doors;
     [SerializeField] private string _url = "";
+    [SerializeField] GameObject gameFinishedScreen;
     private int computerIndex;
     private bool canStartScreen = false;
     private string inputText;
@@ -21,9 +23,7 @@ public class LevelManager : MonoBehaviour
     private Vector3 initPos;
     private Vector3 endPos;
     public delegate void computerHandler();
-
     public delegate void passwordHandler(int value);
-
     public delegate void buzzerHandler(string sound);
     public static event computerHandler startPc;
     public static event computerHandler stopPc;
@@ -38,16 +38,25 @@ public class LevelManager : MonoBehaviour
             computer.GetComputerScreen().SetActive(false);
         }
         textForInput.SetActive(false);
+        gameFinishedScreen.SetActive(false);
 
         computers[0].GetComponent<Computer>()._code = "c";
         computers[1].GetComponent<Computer>()._code = "gT";
         computers[2].GetComponent<Computer>()._code = "3";
-        computers[3].GetComponent<Computer>()._code = "z"; //Contraseña final
+        computers[3].GetComponent<Computer>()._code = "Ciber"; //Contraseña final
         
         computers[0].GetComponent<Computer>()._index = 0;
         computers[1].GetComponent<Computer>()._index = 1;
         computers[2].GetComponent<Computer>()._index = 2;
         computers[3].GetComponent<Computer>()._index = 3;
+    }
+
+    public void gameFinished(){
+        gameFinishedScreen.SetActive(true);
+    }
+
+    public void returnToMenu(){
+        SceneManager.LoadScene(0);
     }
     
     public void CheckInput(string t_input){
@@ -56,9 +65,14 @@ public class LevelManager : MonoBehaviour
             if (computerIndex != 3) {
                 turnLightOn?.Invoke(computerIndex);
                 OpenDoor();
+                stopScreen();
             }
             else {
+                stopScreen();
                 playBuzzer("s");
+                UnityEngine.Cursor.lockState = CursorLockMode.Confined;
+                UnityEngine.Cursor.visible = true;
+                gameFinished();
             }
             inputText = "";
             return;
@@ -81,7 +95,7 @@ public class LevelManager : MonoBehaviour
     private void OpenDoor(){
         Debug.Log("Door openned");
         canOpenDoor = true;
-        stopScreen();
+        
     }
 
     private void showText(int value){
@@ -108,7 +122,7 @@ public class LevelManager : MonoBehaviour
     }
 
     IEnumerator waitToOpenUrl(){
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(5f);
         OpenWebsite();
     }
     
@@ -155,11 +169,15 @@ public class LevelManager : MonoBehaviour
     }
     
     private void Update(){
-
+        
+        if (Input.GetKeyDown(KeyCode.Escape)) {
+            SceneManager.LoadScene(0);
+            
+        }
+        
         if (canOpenDoor) {
             moveDoor();
         }
-        
         
         if (!canStartScreen) {
             return;
