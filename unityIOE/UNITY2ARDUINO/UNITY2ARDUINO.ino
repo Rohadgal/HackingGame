@@ -178,20 +178,24 @@ void loop() {
     switch(command){
       case '0':
         digitalWrite(ledPin1, HIGH);
-        Serial.println("LED toggled");
+        playTune();
+        //Serial.println("LED toggled");
         break;
       case '1':
         digitalWrite(ledPin2, HIGH);
-        Serial.println("LED toggled");
+        playTune();
+        //Serial.println("LED toggled");
         break;
       case '2':
         digitalWrite(ledPin3, HIGH);
-        Serial.println("LED toggled");
+        playTune();
+        //Serial.println("LED toggled");
         break;
       case 'k':
         digitalWrite(ledPin1, LOW);
         digitalWrite(ledPin2, LOW);
         digitalWrite(ledPin3, LOW);
+        break;
       case 'n':
         playIncorrectInputSound();
         break;
@@ -259,4 +263,16 @@ void playSong(){
     // stop the waveform generation before the next note.
     noTone(buzzer);
   }
+}
+
+void playTune() {
+  //Play a simple tune using tone() function
+  //digitalWrite(buzzerPin, HIGH);
+  tone(buzzer, 261.63, 500);  // Play 1000Hz for 500ms
+  delay(500);                  // Wait for the note to finish
+  tone(buzzer, 1200, 500);  // Play 1200Hz for 500ms
+  delay(500);
+  Serial.println("BUZZER PLAYED");
+ // digitalWrite(buzzerPin, LOW);
+  noTone(buzzer);           // Stop the buzzer
 }

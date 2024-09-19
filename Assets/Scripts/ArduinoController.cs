@@ -12,23 +12,7 @@ public class ArduinoController : MonoBehaviour
         sp.ReadTimeout = 50;
         sp.Write("k");
     }
-
-    void Update(){
-        // if (Input.GetKeyDown(KeyCode.L)) {
-        //     LoseLife();
-        //     Debug.Log("LIFE LOST");
-        // }
-    }
-
-    public void LoseLife()
-    {
-        sp.Write("L");  // Send 'L' to Arduino to indicate a life loss
-        // if (lives > 0)
-        // {
-        //     lives--;
-        //     sp.Write("L");  // Send 'L' to Arduino to indicate a life loss
-        // }
-    }
+    
 
     void OnApplicationQuit()
     {
@@ -38,7 +22,7 @@ public class ArduinoController : MonoBehaviour
         }
     }
     private void TurnLightOn(int value){
-        Debug.Log("lED: " + value);
+        //Debug.Log("lED: " + value);
         string ledPin = value.ToString();
         sp.Write(ledPin);
     }

@@ -61,7 +61,7 @@ public class LevelManager : MonoBehaviour
     
     public void CheckInput(string t_input){
         inputText = t_input;
-        if (inputText.Equals(computers[computerIndex].GetComponent<Computer>()._code, StringComparison.OrdinalIgnoreCase)) {
+        if (inputText.Equals(computers[computerIndex].GetComponent<Computer>()._code, StringComparison.Ordinal)) {
             if (computerIndex != 3) {
                 turnLightOn?.Invoke(computerIndex);
                 OpenDoor();
@@ -79,7 +79,7 @@ public class LevelManager : MonoBehaviour
         }
 
         inputText = "";
-        Debug.Log("Incorrect input.");
+        //Debug.Log("Incorrect input.");
         playBuzzer("n");
         
     }
@@ -93,7 +93,7 @@ public class LevelManager : MonoBehaviour
     }
 
     private void OpenDoor(){
-        Debug.Log("Door openned");
+      //  Debug.Log("Door openned");
         canOpenDoor = true;
         
     }
@@ -162,7 +162,7 @@ public class LevelManager : MonoBehaviour
     
     public void OpenWebsite(){
         if (_url == "") {
-            Debug.Log("No valid url");
+            //Debug.Log("No valid url");
             return;
         }
         Application.OpenURL(_url);

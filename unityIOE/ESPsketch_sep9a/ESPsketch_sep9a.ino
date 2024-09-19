@@ -145,9 +145,9 @@ int wholenote = (60000 * 4) / tempo;
 int divider = 0, noteDuration = 0;
 
 
-const char* ssid = "xxxxxxxxx";
-const char* password = "xxxxxxxx";
-WiFiServer server(8080); // Puerto 8080, puedes cambiarlo si lo prefieres
+const char* ssid = "SAE_INSTITUTE"; // Replace with personal server
+const char* password = "AlumnosSae"; // Replace with personal internet password
+WiFiServer server(8080); // Port 8080, can be changed for prefered one
 //int boton = 2;
 int ledPin1 = 4; // Pin para el LED
 int ledPin2 = 5; // Pin para el LED
@@ -207,17 +207,19 @@ void loop() {
         //ledPin1 = 4;
         digitalWrite(ledPin1, HIGH); // Cambia el estado del LED
         playTune();
-        Serial.println("LED toggled");
+        //Serial.println("LED toggled");
       }
       if (command == "1") {
         //ledPin2 = 5;
         digitalWrite(ledPin2, HIGH); // Cambia el estado del LED
-        Serial.println("LED toggled");
+        playTune();
+        //Serial.println("LED toggled");
       }
       if (command == "2") {
         //ledPin2 = 2;
         digitalWrite(ledPin3, HIGH); // Cambia el estado del LED
-        Serial.println("LED toggled");
+        playTune();
+       // Serial.println("LED toggled");
       }
       if(command == "n"){
         playIncorrectInputSound();
@@ -237,7 +239,7 @@ void loop() {
     digitalWrite(ledPin1, LOW); // Cambia el estado del LED
     digitalWrite(ledPin2, LOW); // Cambia el estado del LED
     digitalWrite(ledPin3, LOW); // Cambia el estado del LED
-    Serial.println("LED toggled off");
+    //Serial.println("LED toggled off");
     Serial.println("Cliente desconectado");
   }
 }
