@@ -12,7 +12,7 @@ public class CubeTrigger : MonoBehaviour{
 		if (other.CompareTag("Cube")) {
 			if (other.gameObject.GetComponent<RoomCube>().getCubeNumber() == indexCube) {
 				isCorrect = true;
-				Debug.Log("CORRECT CUBE");
+				//Debug.Log("CORRECT CUBE");
 			}
 		}
 	}
@@ -23,7 +23,7 @@ public class CubeTrigger : MonoBehaviour{
 			// 	isCorrect = false;
 			// }
 			isCorrect = false;
-			Debug.Log("CUBE EXIT");
+			//Debug.Log("CUBE EXIT");
 		}
 	}
 }

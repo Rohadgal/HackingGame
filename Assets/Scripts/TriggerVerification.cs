@@ -24,7 +24,7 @@ public class TriggerVerification : MonoBehaviour{
             if (countCubes == 4 && !canShowCode) {
                 canShowCode = true;
                 codeImage?.SetActive(true);
-                Debug.Log("SHOW PASSCODE");
+               // Debug.Log("SHOW PASSCODE");
                 notifyCodeOn?.Invoke();
                 
             }
